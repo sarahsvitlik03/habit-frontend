@@ -17,15 +17,28 @@ const chores = ref([]); //stores the list of chores
 const loading = ref(true); // Shows "Loading..." while fetching
 const error = ref(null); // Stores any error message
 
+// fetchChores -> gets the latest chores from MongoDB
+async function fetchChores() {
+  const res = await fetch("https://habit-backend-s2sq.onrender.com/api/chores");
+  if (!res.ok) throw new Error("Failed to fetch");
+  chores.value = await res.json();
+}
+
 // saveChore -> sends PUT request to backend, then re-fetches all chores to refresh UI
 async function saveChore(chore) {
-  await fetch(`https://habit-backend-s2sq.onrender.com/api/chores/${chore._id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(chore),
-  });
-  const res = await fetch("https://habit-backend-s2sq.onrender.com/api/chores");
-  chores.value = await res.json();
+  try {
+    const choreId = chore._id || chore.id;
+    const res = await fetch(`https://habit-backend-s2sq.onrender.com/api/chores/${choreId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(chore),
+    });
+    if (!res.ok) throw new Error("Failed to save");
+    await fetchChores();
+  } catch (err) {
+    console.error(err);
+    error.value = "Could not save chore";
+  }
 }
 
 // Format date for MongoDB
@@ -46,8 +59,8 @@ async function addChore() {
         completed: false,
       }),
     });
-    const newChore = await res.json();
-    chores.value.push(newChore);
+    if (!res.ok) throw new Error("Failed to add chore");
+    await fetchChores();
   } catch (err) {
     error.value = "Could not add chore";
   }
@@ -56,10 +69,7 @@ async function addChore() {
 //runs when component is loaded, fetches all chores, handles errors
  onMounted(async () => {
   try {
-    const res = await fetch("https://habit-backend-s2sq.onrender.com/api/chores");
-    // If the server sends a non-200 response
-    if (!res.ok) throw new Error("Failed to fetch");
-    chores.value = await res.json();
+    await fetchChores();
   } catch (err) {
     console.error(err);
     error.value = "Could not load data from backend"; // Show error message
