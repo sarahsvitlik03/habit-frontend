@@ -25,7 +25,7 @@ const emit = defineEmits(["update", "save"])
       </h3>
 
       <div class="assigned">
-        <span>Assigned:</span>
+        <span>Assigned to</span>
         <input
           type="text"
           v-model="props.chore.assigned"
@@ -39,7 +39,7 @@ const emit = defineEmits(["update", "save"])
         @input="props.chore.day = $event.target.value"
       />
 
-      <p>Status: {{ props.chore.completed ? "Done" : "Not yet" }}</p>
+      <p class="status-text">{{ props.chore.completed ? "All done" : "Still needs doing" }}</p>
 
       <div class="actions">
         <button @click="emit('save', props.chore)">Save</button> <!-- Emit? -->
@@ -63,5 +63,28 @@ const emit = defineEmits(["update", "save"])
 
 .container {
   padding: 1rem;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+.assigned span {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.status-text {
+  background: #fff3ec;
+  border-radius: 999px;
+  color: #c95f38;
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0.9rem 0 0;
+  padding: 0.35rem 0.7rem;
 }
 </style>
