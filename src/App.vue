@@ -19,12 +19,12 @@ const error = ref(null); // Stores any error message
 
 // saveChore -> sends PUT request to backend, then re-fetches all chores to refresh UI
 async function saveChore(chore) {
-  await fetch(`https://habit-tracker-2-mai0.onrender.com/api/chores/${chore._id}`, {
+  await fetch(`https://habit-backend-s2sq.onrender.com/api/chores/${chore._id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(chore),
   });
-  const res = await fetch("https://habit-tracker-2-mai0.onrender.com/api/chores");
+  const res = await fetch("https://habit-backend-s2sq.onrender.com/api/chores");
   chores.value = await res.json();
 }
 
@@ -36,7 +36,7 @@ function formatDate(dateStr) {
 //Add a new chore -> sends post request to create new chore in MongoDB, adds new chore to chores array
 async function addChore() {
   try {
-    const res = await fetch("https://habit-tracker-2-mai0.onrender.com/api/chores", {
+    const res = await fetch("https://habit-backend-s2sq.onrender.com/api/chores", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -56,7 +56,7 @@ async function addChore() {
 //runs when component is loaded, fetches all chores, handles errors
  onMounted(async () => {
   try {
-    const res = await fetch("https://habit-tracker-2-mai0.onrender.com/api/chores");
+    const res = await fetch("https://habit-backend-s2sq.onrender.com/api/chores");
     // If the server sends a non-200 response
     if (!res.ok) throw new Error("Failed to fetch");
     chores.value = await res.json();
