@@ -92,6 +92,11 @@ async function addChore() {
 </template>
 
 <style scoped>
+:global(body) {
+  margin: 0;
+  background: #fff8f4;
+}
+
 .page-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 5% 10%;
@@ -102,28 +107,30 @@ async function addChore() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 3px solid coral;
-  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #ff8a65;
+  padding-bottom: 0.75rem;
 }
 
 .top-line h1 {
-  color: coral;
+  color: #e66b43;
   font-size: 2rem;
   margin: 0;
 }
 
 .top-line button {
-  background-color: coral;
+  background-color: #ff7f50;
   color: white;
   border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255,127,80,0.25);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .top-line button:hover {
-  background-color: #ff7f50;  
+  background-color: #e66b43;
+  transform: translateY(-1px);  
 }
 
 .status, .error {
@@ -153,14 +160,15 @@ h3 {
 }
 
 input[type="text"], input[type="date"] {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 0.4rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
   width: 100%;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 input[type="text"]:focus, input[type="date"]:focus {
-  border-color: coral;
+  border-color: #ff7f50;
+  box-shadow: 0 0 0 3px rgba(255,127,80,0.12);
   outline: none;
 }
 
@@ -171,7 +179,7 @@ input[type="text"]:focus, input[type="date"]:focus {
 .assigned span {
   font-weight: bold;
   margin-right: 0.5rem;
-  color: coral;
+  color: #e66b43;
 }
 
 .actions {
@@ -179,15 +187,38 @@ input[type="text"]:focus, input[type="date"]:focus {
   text-align: right;
 }
 .actions button {
-  background-color: coral;
+  background-color: #ff7f50;
   color: white;
   border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .actions button:hover {
-  background-color: #ff7f50;
+  background-color: #e66b43;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .chores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-container {
+    margin: 1.5rem;
+  }
+
+  .top-line {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .chores-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

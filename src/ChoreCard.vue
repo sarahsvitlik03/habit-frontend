@@ -51,14 +51,14 @@ const emit = defineEmits(["update", "save"])
 <style scoped>
 .chores-card {
   background: #fff;
-  border: 2px solid coral;
+  border: 1px solid #ff9a76;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(255,127,80,0.3);
+  box-shadow: 0 6px 16px rgba(255,127,80,0.18);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .chores-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(255,127,80,0.4);
+  box-shadow: 0 10px 22px rgba(255,127,80,0.28);
 }
 
 .container {
