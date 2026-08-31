@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import ChoreCard from "./ChoreCard.vue"
+import ChoreLoader from "./ChoreLoader.vue"
 
 
 /* Hard coded JSON Data -> Now pulling instead from MongoDB  
@@ -83,21 +84,19 @@ async function addChore() {
   <div class="page-container">
   <div class="top-line">
     <h1>Household Chore Tracker</h1>
-    <button type="button" @click="addChore">Insert Chore</button>
+    <button type="button" @click="addChore" :disabled="loading">Insert Chore</button>
   </div>
-  <!-- When loading -->
-    <p v-if="loading" class="status">Loading data...</p>
-    <!-- When an error occurs -->
-    <p v-if="error" class="error">{{ error }}</p>
-      <div class="chores-grid">
-  <ChoreCard
-    v-for="chore in chores"
-    :key="chore._id"
-    :chore="chore"
-    :format-date="formatDate"
-    @save="saveChore"
-  />
-  </div>
+    <ChoreLoader v-if="loading" />
+    <p v-else-if="error" class="error">{{ error }}</p>
+    <div v-else class="chores-grid">
+      <ChoreCard
+        v-for="chore in chores"
+        :key="chore._id"
+        :chore="chore"
+        :format-date="formatDate"
+        @save="saveChore"
+      />
+    </div>
  </div>
 </template>
 
@@ -138,9 +137,14 @@ async function addChore() {
   box-shadow: 0 4px 12px rgba(255,127,80,0.25);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.top-line button:hover {
+.top-line button:hover:not(:disabled) {
   background-color: #e66b43;
   transform: translateY(-1px);  
+}
+
+.top-line button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .status, .error {
