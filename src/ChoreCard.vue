@@ -152,7 +152,7 @@ h3 {
   letter-spacing: 0.04em;
   margin-bottom: 0.25rem;
   text-transform: uppercase;
-}
+} 
 
 .assigned input,
 .due-date {
