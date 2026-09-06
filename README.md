@@ -1,44 +1,71 @@
-# frontend
+# Chore Tracker
 
-This template should help get you started developing with Vue 3 in Vite.
+A lightweight **Vue 3 + Vite** application built as the frontend for a habit‑tracking platform. This project focuses on clean UI architecture, fast builds, and a simple deployment workflow using **GitHub Pages**.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3 Composition API for modular, maintainable components  
+- Vite 7 for instant HMR and optimized production builds  
+- Reusable UI components for habit cards, progress indicators, and daily check‑ins  
+- GitHub Pages deployment using a `/docs` build directory  
+- ESLint + Vue recommended rules for consistent code quality  
 
-## Recommended Browser Setup
+## Tech Stack
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Vue 3  
+- Vite 7  
+- JavaScript  
+- HTML  
+- ESLint (Vue + JS rules)
 
-## Customize configuration
+## Getting Started
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+### Install dependencies
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+### Run development server
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
-
-```sh
+### Build for production
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+The production build outputs to `/dist`.  
+For GitHub Pages, the `/dist` folder is renamed to `/docs`.
 
-```sh
+### Lint
+```bash
 npm run lint
+```
+
+## Project Structure
+
+```
+habit-frontend/
+├── docs/              # Production build for GitHub Pages
+├── src/               # App source code
+│   ├── components/    # Reusable Vue components
+│   ├── assets/        # Images, icons, styles
+│   └── App.vue        # Root component
+├── index.html
+├── vite.config.js
+└── package.json
+```
+
+## Deployment
+
+This project is deployed using **GitHub Pages**:
+
+- **Branch:** `main`  
+- **Folder:** `/docs`  
+
+`vite.config.js` includes:
+
+```js
+base: '/habit-frontend/'
 ```
